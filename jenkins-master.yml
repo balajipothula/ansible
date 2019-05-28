@@ -31,8 +31,8 @@
         
     - name: remove tomcat tarball
       file:
-        state: absent
         path: /home/ubuntu/apache-tomcat-8.5.41.tar.gz
+        state: absent
         
-    - name: Link source file to another destination
+    - name: rename tomcat directory
       command: creates=/home/ubuntu/tomcat mv /home/ubuntu/apache-tomcat-8.5.41 /home/ubuntu/tomcat
