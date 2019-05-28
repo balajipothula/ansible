@@ -47,7 +47,7 @@
     - name: remove windows batch files
       find:
         paths: "{{ TOMCAT_ROOT }}/bin"
-        patterns: *.bat
+        patterns: "*.bat"
       register: files_to_delete
       
     - name: remove non-essentials folders from tomcat directory
