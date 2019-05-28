@@ -1,29 +1,39 @@
 ---
 - name: setup jenkins master on ubuntu
+  
   hosts: jenkinsmaster
+  
   gather_facts: false
+  
   become: true
+  
   tasks:
+  
     - name: update packages index
       apt:
         update_cache: yes
+        
     - name: install wget openjdk-8-jdk
       apt:
         name:
           - wget
           - openjdk-8-jdk
+          
     - name: download tomcat
       get_url:
         url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz
         dest: /home/ubuntu/apache-tomcat-8.5.41.tar.gz
+        
     - name: extract tomcat tarball
       unarchive:
         remote_src: yes
         src: /home/ubuntu/apache-tomcat-8.5.41.tar.gz
         dest: /home/ubuntu/
+        
     - name: remove tomcat tarball
       file:
         state: absent
         path: /home/ubuntu/apache-tomcat-8.5.41.tar.gz
+        
     - name: Link source file to another destination
       command: creates=/home/ubuntu/tomcat mv /home/ubuntu/apache-tomcat-8.5.41 /home/ubuntu/tomcat
