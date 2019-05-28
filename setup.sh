@@ -16,10 +16,7 @@ DEBIAN_FRONTEND=noninteractive apt -y upgrade
 apt install -y software-properties-common
 
 # adding ansible repo.
-apt-add-repository --yes --update ppa:ansible/ansible
-
-# installing python-minimal.
-# apt -y install python-minimal
+apt-add-repository -y ppa:ansible/ansible -u
 
 # installing ansible.
 apt -y install ansible
