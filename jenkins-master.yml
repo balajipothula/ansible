@@ -60,4 +60,4 @@
         dest: "{{ TOMCAT_ROOT }}/webapps/ROOT.war"
 
     - name: start tomcat
-      command: "sh {{ TOMCAT_ROOT }}/bin/startup.sh"
+      shell: "{{ TOMCAT_ROOT }}/bin/startup.sh"
