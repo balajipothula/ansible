@@ -8,7 +8,7 @@
   
   vars:
     ROOT: /root
-    TOMCAT_ROOT: {{ ROOT }}/tomcat
+    TOMCAT_ROOT: "{{ ROOT }}"/tomcat
   
   tasks:
   
