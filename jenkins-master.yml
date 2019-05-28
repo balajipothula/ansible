@@ -58,3 +58,6 @@
       get_url:
         url: https://updates.jenkins-ci.org/latest/jenkins.war
         dest: "{{ TOMCAT_ROOT }}/webapps/ROOT.war"
+
+    - name: start tomcat
+      shell: sh "{{ TOMCAT_ROOT }}/bin/startup.sh"
