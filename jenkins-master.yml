@@ -37,6 +37,10 @@
     - name: rename tomcat directory
       command: creates=/home/ubuntu/tomcat mv /home/ubuntu/apache-tomcat-8.5.41 /home/ubuntu/tomcat
     
-    - name: remove non-essentials from tomcat directory
+    - name: remove non-essentials files from tomcat directory
       shell: find /home/ubuntu/tomcat -maxdepth 1 -type f -delete
-      shell: rm -rf /home/ubuntu/tomcat/webapps/docs
+    
+    - name: remove non-essentials folders from tomcat directory
+      file:
+        path: /home/ubuntu/tomcat/webapps/docs
+        state: absent
