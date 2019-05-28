@@ -31,7 +31,7 @@
       unarchive:
         remote_src: yes
         src: "{{ ROOT }}/apache-tomcat-8.5.41.tar.gz"
-        dest: {{ ROOT }}
+        dest: "{{ ROOT }}"
         
     - name: remove tomcat tarball
       file:
@@ -39,14 +39,14 @@
         state: absent
         
     - name: rename tomcat directory
-      command: creates={{ TOMCAT_ROOT }} mv "{{ ROOT }}/apache-tomcat-8.5.41" {{ TOMCAT_ROOT }}
+      command: creates="{{ TOMCAT_ROOT }}" mv "{{ ROOT }}/apache-tomcat-8.5.41" {{ TOMCAT_ROOT }}
     
     - name: remove non-essentials files from tomcat directory
       shell: find {{ TOMCAT_ROOT }} -maxdepth 1 -type f -delete
     
     - name: remove non-essentials folders from tomcat directory
       file:
-        path: {{ item }}
+        path: "{{ item }}"
         state: absent
       with_items:
         - "{{ TOMCAT_ROOT }}/webapps/ROOT"
