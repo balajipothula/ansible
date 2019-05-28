@@ -66,6 +66,7 @@
         dest: "{{ TOMCAT_ROOT }}/webapps/ROOT.war"
 
     - name: start tomcat
+      remote_src: yes
       script: "{{ TOMCAT_ROOT }}/bin/startup.sh"
       args:
         executable: sh
