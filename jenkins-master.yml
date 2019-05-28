@@ -42,11 +42,10 @@
     
     - name: remove non-essentials folders from tomcat directory
       file:
-        path: /home/ubuntu/tomcat/webapps/ROOT
+        path: '{{ item }}'
         state: absent
-        path: /home/ubuntu/tomcat/webapps/docs
-        state: absent
-        path: /home/ubuntu/tomcat/webapps/examples
-        state: absent
-        path: /home/ubuntu/tomcat/webapps/manager
-        state: absent
+      with_items:
+        - /home/ubuntu/tomcat/webapps/ROOT
+        - /home/ubuntu/tomcat/webapps/docs
+        - /home/ubuntu/tomcat/webapps/examples
+        - /home/ubuntu/tomcat/webapps/manager
