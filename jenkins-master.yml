@@ -31,7 +31,7 @@
       unarchive:
         remote_src: yes
         src: "{{ ROOT }}/apache-tomcat-8.5.41.tar.gz"
-        dest: "{{ ROOT }}/"
+        dest: {{ ROOT }}
         
     - name: remove tomcat tarball
       file:
