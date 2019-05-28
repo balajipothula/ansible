@@ -46,6 +46,7 @@
       
     - name: remove windows batch files
       find:
+        remote_src: yes
         paths: "{{ TOMCAT_ROOT }}/bin"
         patterns: "*.bat"
       register: files_to_delete
