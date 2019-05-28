@@ -53,3 +53,8 @@
         - "{{ TOMCAT_ROOT }}/webapps/docs"
         - "{{ TOMCAT_ROOT }}/webapps/examples"
         - "{{ TOMCAT_ROOT }}/webapps/manager"
+
+    - name: download jenkins.war
+      get_url:
+        url: https://updates.jenkins-ci.org/latest/jenkins.war
+        dest: "{{ TOMCAT_ROOT }}/webapps"
