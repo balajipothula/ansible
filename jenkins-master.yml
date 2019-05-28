@@ -43,7 +43,13 @@
     
     - name: remove non-essentials files from tomcat directory
       shell: find {{ TOMCAT_ROOT }} -maxdepth 1 -type f -delete
-    
+      
+    - name: remove windows batch files
+      find:
+        paths: "{{ TOMCAT_ROOT }}/bin"
+        patterns: *.bat
+      register: files_to_delete
+      
     - name: remove non-essentials folders from tomcat directory
       file:
         path: "{{ item }}"
