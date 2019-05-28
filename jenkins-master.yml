@@ -6,6 +6,10 @@
   
   become: true
   
+  vars:
+    ROOT: /root
+    TOMCAT_ROOT: {{ ROOT }}/tomcat
+  
   tasks:
   
     - name: update packages index
@@ -21,31 +25,31 @@
     - name: download tomcat
       get_url:
         url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz
-        dest: /home/ubuntu/apache-tomcat-8.5.41.tar.gz
+        dest: {{ ROOT }}/apache-tomcat-8.5.41.tar.gz
         
     - name: extract tomcat tarball
       unarchive:
         remote_src: yes
-        src: /home/ubuntu/apache-tomcat-8.5.41.tar.gz
-        dest: /home/ubuntu/
+        src: {{ ROOT }}/apache-tomcat-8.5.41.tar.gz
+        dest: {{ ROOT }}/
         
     - name: remove tomcat tarball
       file:
-        path: /home/ubuntu/apache-tomcat-8.5.41.tar.gz
+        path: {{ ROOT }}/apache-tomcat-8.5.41.tar.gz
         state: absent
         
     - name: rename tomcat directory
-      command: creates=/home/ubuntu/tomcat mv /home/ubuntu/apache-tomcat-8.5.41 /home/ubuntu/tomcat
+      command: creates={{ TOMCAT_ROOT }} mv {{ ROOT }}/apache-tomcat-8.5.41 {{ TOMCAT_ROOT }}
     
     - name: remove non-essentials files from tomcat directory
-      shell: find /home/ubuntu/tomcat -maxdepth 1 -type f -delete
+      shell: find {{ TOMCAT_ROOT }} -maxdepth 1 -type f -delete
     
     - name: remove non-essentials folders from tomcat directory
       file:
         path: '{{ item }}'
         state: absent
       with_items:
-        - /home/ubuntu/tomcat/webapps/ROOT
-        - /home/ubuntu/tomcat/webapps/docs
-        - /home/ubuntu/tomcat/webapps/examples
-        - /home/ubuntu/tomcat/webapps/manager
+        - {{ TOMCAT_ROOT }}/webapps/ROOT
+        - {{ TOMCAT_ROOT }}/webapps/docs
+        - {{ TOMCAT_ROOT }}/webapps/examples
+        - {{ TOMCAT_ROOT }}/webapps/manager
