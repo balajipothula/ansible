@@ -45,11 +45,7 @@
       shell: find {{ TOMCAT_ROOT }} -maxdepth 1 -type f -delete
       
     - name: remove windows batch files
-      find:
-        paths: "{{ TOMCAT_ROOT }}/bin"
-        patterns: "*.bat"
-        remote_src: yes
-      register: wildcard_files_to_delete
+      shell: "rm {{ TOMCAT_ROOT }}/bin/*.bat"
       
     - name: remove non-essentials folders from tomcat directory
       file:
