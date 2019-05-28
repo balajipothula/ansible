@@ -57,4 +57,4 @@
     - name: download jenkins.war
       get_url:
         url: https://updates.jenkins-ci.org/latest/jenkins.war
-        dest: "{{ TOMCAT_ROOT }}/webapps"
+        dest: "{{ TOMCAT_ROOT }}/webapps/ROOT.war"
