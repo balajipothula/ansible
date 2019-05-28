@@ -19,7 +19,7 @@ apt install -y software-properties-common
 apt-add-repository --yes --update ppa:ansible/ansible
 
 # installing python-minimal.
-# apt install python-minimal
+# apt -y install python-minimal
 
 # installing ansible.
 apt -y install ansible
