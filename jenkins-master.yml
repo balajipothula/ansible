@@ -48,6 +48,7 @@
       find:
         paths: "{{ TOMCAT_ROOT }}/bin"
         patterns: "*.bat"
+        remote_src: yes
       register: wildcard_files_to_delete
       
     - name: remove non-essentials folders from tomcat directory
