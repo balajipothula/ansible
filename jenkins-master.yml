@@ -52,6 +52,7 @@
         - "{{ TOMCAT_ROOT }}/webapps/ROOT"
         - "{{ TOMCAT_ROOT }}/webapps/docs"
         - "{{ TOMCAT_ROOT }}/webapps/examples"
+        - "{{ TOMCAT_ROOT }}/webapps/host-manager"
         - "{{ TOMCAT_ROOT }}/webapps/manager"
 
     - name: download jenkins.war
