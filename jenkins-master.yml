@@ -9,7 +9,10 @@
   vars:
     ROOT: /root
     TOMCAT_ROOT: "{{ ROOT }}/tomcat"
-  
+    VER: 8.5.41
+    TOMCAT_TAR: "apache-tomcat-{{ VER }}.tar.gz"
+    APACHE_TOMCAT: apache-tomcat
+
   tasks:
   
     - name: update packages index
@@ -24,26 +27,43 @@
           
     - name: download tomcat
       get_url:
-        url: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz
-        dest: "{{ ROOT }}/apache-tomcat-8.5.41.tar.gz"
+        url: "http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v{{ VER }}/bin/{{ TOMCAT_TAR }}"
+        dest: "{{ ROOT }}/{{ TOMCAT_TAR }}"
         
     - name: extract tomcat tarball
       unarchive:
         remote_src: yes
-        src: "{{ ROOT }}/apache-tomcat-8.5.41.tar.gz"
+        src: "{{ ROOT }}/{{ TOMCAT_TAR }}"
         dest: "{{ ROOT }}"
         
     - name: remove tomcat tarball
       file:
-        path: "{{ ROOT }}/apache-tomcat-8.5.41.tar.gz"
+        path: "{{ ROOT }}/{{ TOMCAT_TAR }}"
         state: absent
         
     - name: rename tomcat directory
-      command: creates="{{ TOMCAT_ROOT }}" mv "{{ ROOT }}/apache-tomcat-8.5.41" {{ TOMCAT_ROOT }}
+      command: creates="{{ TOMCAT_ROOT }}" mv "{{ ROOT }}/{{ APACHE_TOMCAT }}-{{ VER }}" {{ TOMCAT_ROOT }}
+
+    - name: remove tomcat extracted directory
+      file:
+        path: "{{ ROOT }}/{{ APACHE_TOMCAT }}-{{ VER }}"
+        state: absent
     
     - name: remove non-essentials files from tomcat directory
       shell: find {{ TOMCAT_ROOT }} -maxdepth 1 -type f -delete
-      
+
+    - name: find .bat files in tomcat bin directory
+      find:
+        path: "{{ TOMCAT_ROOT }}/bin"
+        patterns: "*.bat"
+      register: bat
+
+    - name: remove .bat files from tomcat bin directory
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ bat.files }}"
+   
     - name: remove non-essentials folders from tomcat directory
       file:
         path: "{{ item }}"
@@ -62,3 +82,15 @@
 
     - name: start tomcat
       command: "nohup {{ TOMCAT_ROOT }}/bin/startup.sh"
+
+    - name: wait 30 seconds
+      wait_for: timeout=30
+
+    - name: get jenkins initial admin password
+      shell: cat /root/.jenkins/secrets/initialAdminPassword
+      changed_when: false
+      register: adminpasswd
+
+    - name: jenkins initial admin password
+      debug:
+        var: adminpasswd.stdout
