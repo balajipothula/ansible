@@ -2,7 +2,7 @@
 
 # Author      : BALAJI POTHULA <balaji.pothula@techie.com>,
 # Date        : 27 May 2019,
-# Description : Installing ansible on Ubuntu.
+# Description : Setup of ansible-controller on Ubuntu.
 
 # Note: Please run this script with sudo privilage.
 
