@@ -12,11 +12,8 @@ apt update
 # upgrading packages.
 DEBIAN_FRONTEND=noninteractive apt -y upgrade
 
-# installing software-properties-common.
-apt install -y software-properties-common
-
-# adding ansible repo.
-apt-add-repository -y ppa:ansible/ansible -u
+# installing python3-pip.
+apt -y install python3-pip
 
 # installing ansible.
-apt -y install ansible
+pip3 install ansible
