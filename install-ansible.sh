@@ -12,8 +12,8 @@ apt update
 # upgrading packages.
 DEBIAN_FRONTEND=noninteractive apt -y upgrade
 
-# installing python3-pip.
-apt -y install python3-pip
+# installing python3 and python3-pip.
+apt -y install python3 python3-pip vim
 
 # installing ansible.
 pip3 install ansible
