@@ -111,11 +111,11 @@
       dest: "{{ TOMCAT_ROOT }}/webapps/ROOT.war"
 
   - name: run jenkins container
-    docker_container:
+    containers:
+    - image: balajipothula/jenkins:latest
       name: jenkins
-      image: balajipothula/jenkins:latest
       volumes:
         - /root/tomcat:/tomcat
       ports:
         - 8080:8080
-      command: sh
+      command: echo hi
