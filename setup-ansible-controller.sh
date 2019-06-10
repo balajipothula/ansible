@@ -16,4 +16,4 @@ DEBIAN_FRONTEND=noninteractive apt -y upgrade
 apt -y install python3 python3-pip vim
 
 # installing ansible.
-pip3 install ansible
+pip3 install ansible ansible-lint
