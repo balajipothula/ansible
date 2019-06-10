@@ -1,7 +1,7 @@
 ---
 
 - name: setup tomcat on ubuntu
-  hosts: tomcat_test
+  hosts: host_tomcat_test
   gather_facts: false
   become: true
   vars:
