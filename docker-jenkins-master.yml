@@ -1,7 +1,7 @@
 ---
 
 - name: setup jenkins master on ubuntu
-  hosts: jenkins_master
+  hosts: host_jenkins_master
   gather_facts: false
   become: true
   vars:
