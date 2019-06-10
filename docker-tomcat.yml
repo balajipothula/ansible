@@ -1,7 +1,7 @@
 ---
 
 - name: setup tomcat on ubuntu
-  hosts: host_tomcat_test
+  hosts: tomcat_test
   gather_facts: false
   become: true
   vars:
@@ -47,7 +47,7 @@
 
   - name: pull jenkins image
     docker_image:
-      name: balajipothula/jenkins:latest
+      name: balajipothula/tomcat:8.5.40
       source: pull
     debugger: on_failed
   - name: download tomcat
