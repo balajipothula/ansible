@@ -1,7 +1,7 @@
 ---
 
 - name: setup jenkins master on ubuntu
-  hosts: jenkins_master
+  hosts: host_jenkins_master
   gather_facts: false
   become: true
   vars:
@@ -13,44 +13,6 @@
 
   tasks:
 
-<<<<<<< HEAD
-  - name: uninstall old docker versions
-    apt:
-      name:
-        - docker
-        - docker-engine
-        - docker.io
-        - containerd
-        - runc
-      state: absent
-
-  - name: add docker official gpg key
-    apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      state: present
-
-  - name: add docker repository
-    apt_repository:
-      repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-      state: present
-      filename: docker
-
-  - name: install docker-ce
-    apt:
-      name:
-        - aptitude
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - software-properties-common
-        - docker-ce
-      update_cache: yes
-
-  - name: pull jenkins image
-    docker_image:
-      name: balajipothula/jenkins:latest
-      source: pull
-    debugger: on_failed
   - name: download tomcat
     get_url:
       url: "http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v{{ VER }}/bin/{{ TOMCAT_TAR }}"
@@ -66,7 +28,6 @@
       state: absent
   - name: rename tomcat directory
     command: creates="{{ TOMCAT_ROOT }}" mv "{{ ROOT }}/{{ APACHE_TOMCAT }}-{{ VER }}" {{ TOMCAT_ROOT }}
-=======
   - name: download tomcat
     get_url:
       url: "http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v{{ VER }}/bin/{{ TOMCAT_TAR }}"
@@ -125,7 +86,6 @@
     get_url:
       url: https://updates.jenkins-ci.org/latest/jenkins.war
       dest: "{{ TOMCAT_ROOT }}/webapps/ROOT.war"
->>>>>>> 9a2db4c22e9c5bc32da328046a6c016ea52d38ad
 
   - name: remove tomcat extracted directory
     file:
