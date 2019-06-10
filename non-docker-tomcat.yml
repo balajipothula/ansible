@@ -1,7 +1,7 @@
 ---
 
-- name: setup jenkins master on ubuntu
-  hosts: jenkins_master
+- name: setup tomcat on ubuntu
+  hosts: tomcat_test
   gather_facts: false
   become: true
   vars:
