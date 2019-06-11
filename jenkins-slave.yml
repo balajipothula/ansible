@@ -1,0 +1,11 @@
+---
+
+- name: setup jenkins slave on ubuntu
+  hosts: jenkinsslave
+  gather_facts: false
+  become: true
+  tasks:
+    - name: install openjdk-8-jre
+      apt-get:
+        name:
+          - openjdk-8-jre
