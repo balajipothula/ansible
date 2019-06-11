@@ -6,7 +6,7 @@
   become: true
   vars:
     ROOT: /root
-    TOMCAT_ROOT: "{{ ROOT }}/tomcat"
+    TOMCAT_ROOT: "{{ ROOT }}/.tomcat"
     VER: 8.5.41
     TOMCAT_TAR: "apache-tomcat-{{ VER }}.tar.gz"
     APACHE_TOMCAT: apache-tomcat
