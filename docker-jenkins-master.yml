@@ -12,6 +12,7 @@
     VER: 8.5.41
     TOMCAT_TAR: "apache-tomcat-{{VER}}.tar.gz"
     APACHE_TOMCAT: apache-tomcat
+    UBUNTU_CODE_NAME: bionic
 
   tasks:
   - name: uninstall old docker versions
@@ -33,7 +34,7 @@
 
   - name: add docker repository
     apt_repository:
-      repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+      repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{UBUNTU_CODE_NAME}} stable"
       state: present
       filename: docker
     debugger: on_failed
