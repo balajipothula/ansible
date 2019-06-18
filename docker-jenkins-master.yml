@@ -1,7 +1,7 @@
 ---
 
 - name: setup jenkins master on ubuntu
-  hosts: host_jenkins_master
+  hosts: jenkins_master
   strategy: linear # linear, serial, free
   gather_facts: false
   become: true
