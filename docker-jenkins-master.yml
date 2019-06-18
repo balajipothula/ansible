@@ -2,7 +2,7 @@
 
 - name: setup jenkins master on ubuntu
   hosts: jenkins_master
-  strategy: linear # linear, serial, free
+  strategy: free # linear, serial, free
   gather_facts: false
   become: true
   vars:
