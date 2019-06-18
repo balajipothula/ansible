@@ -13,7 +13,6 @@
     APACHE_TOMCAT: apache-tomcat
 
   tasks:
-
   - name: uninstall old docker versions
     apt:
       name:
@@ -23,17 +22,20 @@
         - containerd
         - runc
       state: absent
+    debugger: on_failed
 
   - name: add docker official gpg key
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
       state: present
+    debugger: on_failed
 
   - name: add docker repository
     apt_repository:
       repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
       state: present
       filename: docker
+    debugger: on_failed
 
   - name: install docker-ce
     apt:
@@ -45,6 +47,7 @@
         - software-properties-common
         - docker-ce
       update_cache: yes
+    debugger: on_failed
 
   - name: pull jenkins image
     docker_image:
@@ -55,17 +58,24 @@
     get_url:
       url: "http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v{{ VER }}/bin/{{ TOMCAT_TAR }}"
       dest: "{{ ROOT }}/{{ TOMCAT_TAR }}"
+    debugger: on_failed
+      
   - name: extract tomcat tarball
     unarchive:
       remote_src: yes
       src: "{{ ROOT }}/{{ TOMCAT_TAR }}"
       dest: "{{ ROOT }}"
+    debugger: on_failed
+      
   - name: remove tomcat tarball
     file:
       path: "{{ ROOT }}/{{ TOMCAT_TAR }}"
       state: absent
+    debugger: on_failed
+      
   - name: rename tomcat directory
     command: creates="{{ TOMCAT_ROOT }}" mv "{{ ROOT }}/{{ APACHE_TOMCAT }}-{{ VER }}" {{ TOMCAT_ROOT }}
+    debugger: on_failed
 
   - name: remove tomcat extracted directory
     file:
