@@ -6,6 +6,8 @@
 
 # Note: Please run this script with sudo privilage.
 
+# apt update && DEBIAN_FRONTEND=noninteractive apt -y upgrade && apt -y install python3 python3-pip vim && pip3 install docker
+
 # updating packages index.
 apt update
 
