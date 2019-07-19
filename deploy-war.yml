@@ -7,7 +7,7 @@
   gather_facts: false
   become: true
   vars:
-    ROOT: /root
+    ROOT: {{ansible_env.HOME}}/root
     TOMCAT_ROOT: "{{ROOT}}/.tomcat"
 
   tasks:
@@ -16,5 +16,4 @@
       url: http://nexus.oss.balaji.network:8081/nexus/content/repositories/releases/com/bit/
       username: admin
       password: admin123
-      dest: "{{TOMCAT_ROOT}}/webapps/ROOT.war"
-      
+      dest: "{{TOMCAT_ROOT}}/webapps/ROOT.war
