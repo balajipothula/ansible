@@ -1,7 +1,7 @@
 
 ---
 
-- name: deploy artifact on tomcat test server
+- name: deploy artifact into tomcat test server
   hosts: tomcat_test
   strategy: free # linear, serial, free
   gather_facts: false
