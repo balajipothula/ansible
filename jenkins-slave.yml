@@ -2,6 +2,7 @@
 
 - name: setup jenkins slave on ubuntu
   hosts: jenkins_slave
+  strategy: linear # linear, serial, free
   gather_facts: false
   become: true
   tasks:
