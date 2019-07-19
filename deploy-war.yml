@@ -1,0 +1,18 @@
+
+---
+
+- name: setup jenkins master on ubuntu
+  hosts: jenkins_master
+  strategy: free # linear, serial, free
+  gather_facts: false
+  become: true
+  vars:
+    ROOT: /root
+    TOMCAT_ROOT: "{{ROOT}}/.tomcat"
+
+  tasks:
+  - name: download jenkins.war
+    get_url:
+      url: https://updates.jenkins-ci.org/latest/jenkins.war
+      dest: "{{TOMCAT_ROOT}}/webapps/ROOT.war"
+      
