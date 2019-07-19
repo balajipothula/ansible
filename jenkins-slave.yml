@@ -5,7 +5,8 @@
   gather_facts: false
   become: true
   tasks:
-    - name: install openjdk-8-jre
+    - name: install git openjdk-8-jdk
       apt-get:
         name:
-          - openjdk-8-jre
+          - git
+          - openjdk-8-jdk
