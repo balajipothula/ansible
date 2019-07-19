@@ -13,6 +13,6 @@
   tasks:
   - name: download jenkins.war
     get_url:
-      url: https://updates.jenkins-ci.org/latest/jenkins.war
+      url: http://nexus.oss.balaji.network:8081/nexus/content/repositories/releases/com/bit/
       dest: "{{TOMCAT_ROOT}}/webapps/ROOT.war"
       
