@@ -1,8 +1,8 @@
 
 ---
 
-- name: setup jenkins master on ubuntu
-  hosts: jenkins_master
+- name: deploy artifact on tomcat test server
+  hosts: tomcat_test
   strategy: free # linear, serial, free
   gather_facts: false
   become: true
