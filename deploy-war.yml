@@ -14,5 +14,7 @@
   - name: download jenkins.war
     get_url:
       url: http://nexus.oss.balaji.network:8081/nexus/content/repositories/releases/com/bit/
+      username: admin
+      password: admin123
       dest: "{{TOMCAT_ROOT}}/webapps/ROOT.war"
       
