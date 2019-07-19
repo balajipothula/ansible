@@ -11,7 +11,7 @@
     TOMCAT_ROOT: "{{ROOT}}/.tomcat"
 
   tasks:
-  - name: download jenkins.war
+  - name: download artifact from nexus oss
     get_url:
       url: http://nexus.oss.balaji.network:8081/nexus/content/repositories/releases/com/bit/
       username: admin
