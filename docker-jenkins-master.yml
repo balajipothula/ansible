@@ -53,7 +53,7 @@
 
   - name: pull jenkins image
     docker_image:
-      name: balajipothula/jenkins:latest
+      name: balajipothula/jenkins:openjdk8
       source: pull
     debugger: on_failed
   - name: download tomcat
