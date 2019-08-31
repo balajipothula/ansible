@@ -9,11 +9,8 @@
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
 # https://docs.ansible.com/ansible-lint/rules/default_rules.html
 
-# installing ansible via pip.
-pip install ansible
-
-# installing ansible-lint via pip.
-pip install ansible-lint
+# installing ansible ansible-lint via pip.
+pip install ansible ansible-lint
 
 # upgrading pip via pip.
 pip install --upgrade pip
