@@ -9,6 +9,15 @@
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
 # https://docs.ansible.com/ansible-lint/rules/default_rules.html
 
+# installing ansible via pip.
+pip install ansible
+
+# installing ansible-lint via pip.
+pip install ansible-lint
+
+# upgrading pip via pip.
+pip install --upgrade pip
+
 # generate id_rsa and id_rsa.pub into $HOME/.ssh of ansible-controller.
 # copy id_rsa.pub into authorized_keys of ansible-node(s).
 ssh-keygen -q -N '' -m pem -t rsa -b 4096 -C balaji.pothula@techie.com -f
@@ -77,4 +86,3 @@ ansible-galaxy init tomcat
 
 
 ansible -m debug -a "var=hostvars['hostname']" -i host-jenkins-master jenkins_master
-
