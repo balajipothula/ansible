@@ -23,5 +23,5 @@ cd       $HOME                                                                  
 rm  -rf  $HOME/Python                                                                 && \
 ln       $HOME/python/bin/python3.7 $HOME/python/bin/python                           && \
 ln       $HOME/python/bin/pip3.7    $HOME/python/bin/pip                              && \
-echo "export PATH=$PATH:$HOME/Python/bin" >> $HOME/.bashrc                            && \
+echo "export PATH=$PATH:$HOME/python/bin" >> $HOME/.bashrc                            && \
 exec $BASH
