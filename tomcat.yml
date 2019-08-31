@@ -5,8 +5,8 @@
   remote_user: ec2-user
   gather_facts: true
   vars:
-    ROOT: "{{ ansible_env.HOME }}"
-    TOMCAT_ROOT: "{{ ROOT }}/tomcat"
+    HOME: "{{ ansible_env.HOME }}"
+    TOMCAT_HOME: "{{ HOME }}/tomcat"
     VER: 8.5.45
     TOMCAT_TAR: "apache-tomcat-{{ VER }}.tar.gz"
     APACHE_TOMCAT: apache-tomcat
@@ -16,26 +16,26 @@
   - name: download tomcat
     get_url:
       url: "http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v{{ VER }}/bin/{{ TOMCAT_TAR }}"
-      dest: "{{ ROOT }}/{{ TOMCAT_TAR }}"
+      dest: "{{ HOME }}/{{ TOMCAT_TAR }}"
   - name: extract tomcat tarball
     unarchive:
       remote_src: yes
-      src: "{{ ROOT }}/{{ TOMCAT_TAR }}"
-      dest: "{{ ROOT }}"
+      src: "{{ HOME }}/{{ TOMCAT_TAR }}"
+      dest: "{{ HOME }}"
   - name: remove tomcat tarball
     file:
-      path: "{{ ROOT }}/{{ TOMCAT_TAR }}"
+      path: "{{ HOME }}/{{ TOMCAT_TAR }}"
       state: absent
   - name: rename tomcat directory
-    command: creates="{{ TOMCAT_ROOT }}" mv "{{ ROOT }}/{{ APACHE_TOMCAT }}-{{ VER }}" {{ TOMCAT_ROOT }}
+    command: creates="{{ TOMCAT_HOME }}" mv "{{ HOME }}/{{ APACHE_TOMCAT }}-{{ VER }}" {{ TOMCAT_HOME }}
 
   - name: remove tomcat extracted directory
     file:
-      path: "{{ ROOT }}/{{ APACHE_TOMCAT }}-{{ VER }}"
+      path: "{{ HOME }}/{{ APACHE_TOMCAT }}-{{ VER }}"
       state: absent
   - name: find non essential files from tomcat directory
     find:
-      path: "{{ TOMCAT_ROOT }}"
+      path: "{{ TOMCAT_HOME }}"
       file_type: file
       depth: 1
     register: nonessential
@@ -47,7 +47,7 @@
 
   - name: find .bat files in tomcat bin directory
     find:
-      path: "{{ TOMCAT_ROOT }}/bin"
+      path: "{{ TOMCAT_HOME }}/bin"
       patterns: "*.bat"
     register: bat
   - name: remove .bat files from tomcat bin directory
@@ -61,10 +61,10 @@
       path: "{{ item }}"
       state: absent
     with_items:
-#     - "{{ TOMCAT_ROOT }}/webapps/ROOT"
-      - "{{ TOMCAT_ROOT }}/webapps/docs"
-      - "{{ TOMCAT_ROOT }}/webapps/examples"
-      - "{{ TOMCAT_ROOT }}/webapps/manager"
+#     - "{{ TOMCAT_HOME }}/webapps/HOME"
+      - "{{ TOMCAT_HOME }}/webapps/docs"
+      - "{{ TOMCAT_HOME }}/webapps/examples"
+      - "{{ TOMCAT_HOME }}/webapps/manager"
 
   - name: start tomcat
-    command: "nohup {{ TOMCAT_ROOT }}/bin/startup.sh"
+    command: "nohup {{ TOMCAT_HOME }}/bin/startup.sh"
