@@ -8,7 +8,7 @@
 sudo yum -y update
 
 # installing build essentials.
-sudo yum -y install gcc openssl-devel bzip2-devel libffi-devel
+sudo yum -y install gcc make openssl-devel bzip2-devel libffi-devel
 
 # python downloading, extracting and compiling.
 curl -JL https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz -o $HOME/Python.tgz && \
