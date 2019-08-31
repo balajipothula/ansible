@@ -66,5 +66,5 @@
       - "{{ TOMCAT_ROOT }}/webapps/examples"
       - "{{ TOMCAT_ROOT }}/webapps/manager"
 
-    - name: start tomcat
-      command: "nohup {{ TOMCAT_ROOT }}/bin/startup.sh"
+  - name: start tomcat
+    command: "nohup {{ TOMCAT_ROOT }}/bin/startup.sh"
