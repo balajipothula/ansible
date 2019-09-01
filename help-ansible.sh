@@ -17,7 +17,7 @@ pip install --upgrade pip
 
 # generate id_rsa and id_rsa.pub into $HOME/.ssh of ansible-controller.
 # copy id_rsa.pub into authorized_keys of ansible-node(s).
-ssh-keygen -q -N '' -m pem -t rsa -b 4096 -C balaji.pothula@techie.com -f
+ssh-keygen -q -N '' -m pem -t rsa -b 4096 -C balaji.pothula@techie.com
 
 # pinging host(s) where hosts inventory file in current working directory.
 ansible -m ping all
