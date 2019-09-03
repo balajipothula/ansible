@@ -1,6 +1,6 @@
 ---
 
-- name: setup tomcat on redhat
+- name: setup tomcat
   hosts: tomcat
   remote_user: ec2-user
   gather_facts: true
