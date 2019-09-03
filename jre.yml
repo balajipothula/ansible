@@ -1,0 +1,37 @@
+---
+
+- name: setup jre
+  hosts: tomcat
+  remote_user: ec2-user
+  gather_facts: true
+  vars:
+    HOME: "{{ ansible_env.HOME }}"
+    JRE_ROOT: "{{ HOME }}/jreroot"
+    VER: 8.5.45
+
+  tasks:
+
+  - name: download jre tarball
+    get_url:
+      url: "https://github.com/frekele/oracle-java/releases/download/8u212-b10/jre-8u212-linux-x64.tar.gz"
+      dest: "{{ HOME }}"
+
+  - name: extract jre tarball
+    unarchive:
+      remote_src: yes
+      src: "{{ HOME }}/jre-8u212-linux-x64.tar.gz"
+      dest: "{{ HOME }}"
+
+  - name: remove jre tarball
+    file:
+      path: "{{ HOME }}/jre-8u212-linux-x64.tar.gz"
+      state: absent
+
+  - name: rename jre directory
+    command: creates="{{ JRE_ROOT }}" mv "{{ HOME }}/jre1.8.0_212" "{{ JRE_ROOT }}"
+
+  - name: remove jre extracted directory
+    file: path="{{ HOME }}/jre1.8.0_212" state=absent
+
+  - name: remove non essential directory jre directory
+    file: path="{{ JRE_ROOT }}/man" state=absent
