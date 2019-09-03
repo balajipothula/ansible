@@ -7,7 +7,6 @@
   vars:
     HOME: "{{ ansible_env.HOME }}"
     JRE_ROOT: "{{ HOME }}/jreroot"
-    VER: 8.5.45
 
   tasks:
 
@@ -35,3 +34,8 @@
 
   - name: remove non essential directory jre directory
     file: path="{{ JRE_ROOT }}/man" state=absent
+
+  - name: remove non essential directory jre directory
+    lineinfile:
+      path: "{{ HOME }}/.bashrc"
+      line: "export PATH={{ ansible_env.PATH }}:{{ HOME }}/jreroot/bin"
