@@ -6,6 +6,9 @@
   strategy: free # linear, serial, free
   gather_facts: false
   become: true
+ #remote_user: root
+ #become_method: sudo
+ 
   vars:
     ROOT: /root
     TOMCAT_ROOT: "{{ ROOT }}/tomcat"
