@@ -3,6 +3,7 @@
 - name: setup tomcat on ubuntu
   sudo: yes
   hosts: host_tomcat_test
+  strategy: free # linear, serial, free
   gather_facts: false
   become: true
   vars:
