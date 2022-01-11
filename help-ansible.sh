@@ -83,3 +83,7 @@ ansible-galaxy init tomcat
 
 
 ansible -m debug -a "var=hostvars['hostname']" -i host-jenkins-master jenkins_master
+
+# https://docs.ansible.com/ansible/2.9/user_guide/intro_dynamic_inventory.html#inventory-script-example-aws-ec2
+# https://raw.githubusercontent.com/ansible/ansible/stable-2.9/contrib/inventory/ec2.ini
+ansible -i ec2.py tag_Name_WebApp -m ping -u ubuntu --private-key=/home/ubuntu/Ansible/webapp.pem
