@@ -19,13 +19,35 @@ pip install --upgrade pip
 # copy id_rsa.pub into authorized_keys of ansible-node(s).
 ssh-keygen -q -N '' -m pem -t rsa -b 4096 -C balaji.pothula@techie.com
 
+# runing a system command with out using module(s).
+ansible -i "/home/ansible/Ansible/Tomcat" -a "/sbin/reboot" -f 10 -u ubuntu --become
+
+ansible appservers -m ansible.builtin.copy -a "src=/home/ubuntu/tomcat.txt dest=/home/ubuntu/tomcat.txt"
+
+ansible appservers -m ansible.builtin.file -a "dest=/home/tomcat/hello.txt mode=755 owner=tomcat group=tomcat"
+
+ansible appservers -m ansible.builtin.file -a "dest=/home/tomcat/hello mode=755 owner=tomcat group=tomcat state=directory"
+
+ansible appservers -m ansible.builtin.file -a "dest=/home/tomcat/hello state=absent"
+
+ansible appservers -m ansible.builtin.yum -a "name=nginx state=present"
+ansible appservers -m ansible.builtin.yum -a "name=nginx state=absent"
+ansible appservers -m ansible.builtin.yum -a "name=nginx state=latest"
+
+ansible all -m ansible.builtin.user -a "name=tomcat"
+
+ansible appservers -m ansible.builtin.service -a "name=httpd state=started"
+ansible appservers -m ansible.builtin.service -a "name=httpd state=stopped"
+ansible appservers -m ansible.builtin.service -a "name=httpd state=restarted"
+
+ansible appservers -m git -a "repo=https://github.com/balajipothula/k8s.git dest=/home/tomcat/ version=HEAD"
+
 # pinging host(s) where hosts inventory file in current working directory.
 ansible -m ping all
 ansible -m ping -i host-tomcat tomcat
 ansible -m ping -i "/home/ansible/Ansible/Tomcat" tomcat --private-key="/home/ansible/Ansible/Tomcat.pem"
 ansible -m ping -i "/home/ansible/Ansible/ec2.py" tag_Name_Tomcat -u tomcat ---private-key="/home/ansible/Ansible/Tomcat.pem"
 ansible -m ping -i host-jenkins-master jenkins_master
-
 
 # gathering facts.
 ansible -m setup -i host-jenkins-master jenkins_master
