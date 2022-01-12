@@ -22,7 +22,10 @@ ssh-keygen -q -N '' -m pem -t rsa -b 4096 -C balaji.pothula@techie.com
 # pinging host(s) where hosts inventory file in current working directory.
 ansible -m ping all
 ansible -m ping -i host-tomcat tomcat
+ansible -m ping -i "/home/ansible/Ansible/Tomcat" tomcat --private-key="/home/ansible/Ansible/Tomcat.pem"
+ansible -m ping -i "/home/ansible/Ansible/ec2.py" tag_Name_Tomcat -u tomcat ---private-key="/home/ansible/Ansible/Tomcat.pem"
 ansible -m ping -i host-jenkins-master jenkins_master
+
 
 # gathering facts.
 ansible -m setup -i host-jenkins-master jenkins_master
@@ -45,6 +48,7 @@ ansible-playbook -i host-tomcat --syntax-check tomcat.yml
 
 # specifying inventory host path.
 ansible-playbook -v -i host-tomcat tomcat.yml
+ansible-playbook -v -i "/home/ansible/Ansible/ec2.py" tag_Name_Tomcat -u tomcat ---private-key="/home/ansible/Ansible/Tomcat.pem" Tomcat.yml
 ansible-playbook -v -i hostfile jenkins-master.yml
 ansible-playbook -v -i webhostfile -i dbhostfile jenkins-master.yml
 
